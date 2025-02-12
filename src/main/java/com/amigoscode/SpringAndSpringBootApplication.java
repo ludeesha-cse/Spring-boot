@@ -1,5 +1,7 @@
 package com.amigoscode;
 
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -8,6 +10,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
@@ -63,8 +67,25 @@ public class SpringAndSpringBootApplication {
 
     }
 
-    @Component
+//    @Repository - for data
+//    @Service - for business logic
+//    @Component - for general purpose
+    @Service
     public class UserService {
+
+        public UserService() {
+            System.out.println("UserService Constructor");
+        }
+
+        @PostConstruct
+        public void init(){
+            System.out.println("fill cache");
+        }
+
+        @PreDestroy
+        public void destroy(){
+            System.out.println("clear cache");
+        }
         public List<User> getUsers() {
             return List.of(
                     new User(1, "James"),
