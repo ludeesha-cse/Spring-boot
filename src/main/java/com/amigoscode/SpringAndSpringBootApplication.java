@@ -51,5 +51,4 @@ public class SpringAndSpringBootApplication {
             System.out.println(blueBean);
         };
     }
-
 }
