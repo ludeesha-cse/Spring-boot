@@ -5,7 +5,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Primary;
+import org.springframework.stereotype.Component;
+
+import java.util.List;
+import java.util.Optional;
 
 @SpringBootApplication
 public class SpringAndSpringBootApplication {
@@ -35,11 +40,13 @@ public class SpringAndSpringBootApplication {
     }
 
     @Bean
-    CommandLineRunner CommandLineRunner (String redBean, String blueBean) {
+    CommandLineRunner CommandLineRunner (String redBean, String blueBean, UserService userService) {
         return args -> {
             System.out.println("Hello From commandLineRunner 1");
             System.out.println(redBean);
             System.out.println(blueBean);
+            System.out.println(userService.getUsers());
+            System.out.println(userService.getUserById(2));
         };
     }
 
@@ -50,5 +57,28 @@ public class SpringAndSpringBootApplication {
             System.out.println(redBean);
             System.out.println(blueBean);
         };
+    }
+
+    public record User(int id, String name) {
+
+    }
+
+    @Component
+    public class UserService {
+        public List<User> getUsers() {
+            return List.of(
+                    new User(1, "James"),
+                    new User(2, "Maria"),
+                    new User(3, "Anna")
+            );
+        }
+
+        public Optional<User> getUserById(int id) {
+            return getUsers().stream()
+                    .filter(user -> user.id() == id)
+                    .findFirst();
+        }
+
+
     }
 }
