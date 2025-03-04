@@ -6,7 +6,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -19,7 +18,7 @@ import java.util.stream.Collectors;
 public class SpringAndSpringBootApplication {
 
     public static void main(String[] args) {
-        ConfigurableApplicationContext context = SpringApplication.run(
+        SpringApplication.run(
                 SpringAndSpringBootApplication.class,
                 args
         );
@@ -95,4 +94,5 @@ public class SpringAndSpringBootApplication {
                     }
                 });
     }
+
 }
