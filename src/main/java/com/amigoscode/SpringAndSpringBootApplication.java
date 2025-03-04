@@ -4,6 +4,7 @@ import jdk.jfr.Frequency;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -55,10 +56,11 @@ public class SpringAndSpringBootApplication {
     }
 
     @GetMapping("{id}")
-    public Optional<Person> getPersonById(@PathVariable("id") Integer id) {
-        return People.stream()
-                .filter(person -> person.id().equals(id))
+    public ResponseEntity<Optional<Person>> getPersonById(@PathVariable("id") Integer id) {
+        Optional<Person> person = People.stream()
+                .filter(p -> p.id().equals(id))
                 .findFirst();
+        return ResponseEntity.ok().body(person);
     }
 
     @DeleteMapping("{id}")
