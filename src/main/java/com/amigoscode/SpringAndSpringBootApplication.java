@@ -1,6 +1,7 @@
 
 package com.amigoscode;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.ResponseEntity;
@@ -50,12 +51,21 @@ public class SpringAndSpringBootApplication {
             return id;
         }
 
+        @JsonIgnore
+        public String getPassword() {
+            return "password";
+        }
+
         public Integer getAge() {
             return age;
         }
 
         public Gender getGender() {
             return gender;
+        }
+
+        public String getProfiloos(){
+            return name + " " + age;
         }
 
         @Override
@@ -92,8 +102,8 @@ public class SpringAndSpringBootApplication {
     }
 
     @GetMapping
-    public List<Person> getPeople(@RequestParam(value = "sort", required = false, defaultValue = "asc") SortOrder sort,
-                                  @RequestParam(value = "limit", required = false) Integer limit) {
+    public List<Person> getPeople(@RequestParam(value = "sort", required = false, defaultValue = "ASC") SortOrder sort,
+                                  @RequestParam(value = "limit", required = false, defaultValue = "10") Integer limit) {
         if (sort == SortOrder.DESC) {
             return People.stream().sorted(Comparator.comparing(Person::getId).reversed()).limit(limit)
                     .collect(Collectors.toList());
