@@ -1,13 +1,13 @@
 package com.amigoscode.Person;
 
 
+import com.amigoscode.validation.Foo;
 import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
 public record NewPersonRequest(
-        @NotEmpty String name,
+        @NotEmpty @Foo String name,  //@Foo is a custom annotation
         @Min(18) Integer age,
-        @NotBlank @NotNull Gender gender
+        @NotNull Gender gender
 ){}
