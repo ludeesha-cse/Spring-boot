@@ -2,6 +2,7 @@ package com.amigoscode.Person;
 
 import com.amigoscode.SortingOrder;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Positive;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,7 +30,7 @@ public class PersonController {
     }
 
     @DeleteMapping("{id}")
-    public void deletePersonById(@PathVariable("id") Integer id) {
+    public void deletePersonById(@Valid @Positive @PathVariable("id") Integer id) {
         personService.deletePersonById(id);
     }
 
