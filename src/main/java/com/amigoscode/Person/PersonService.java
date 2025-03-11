@@ -1,15 +1,11 @@
 package com.amigoscode.Person;
 
 import com.amigoscode.SortingOrder;
-import com.amigoscode.SpringAndSpringBootApplication;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.*;
 
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 @Service
