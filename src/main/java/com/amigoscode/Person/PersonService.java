@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -26,10 +25,10 @@ public class PersonService {
                 .collect(Collectors.toList());
     }
 
-    public Optional<Person> getPersonById(Integer id) {
+    public Person getPersonById(Integer id) {
         return personRepository.getPeople().stream()
                 .filter(p -> p.id().equals(id))
-                .findFirst();
+                .findFirst().orElseThrow(() -> new IllegalStateException("Person with id " + id + " does not exist"));
     }
 
     public void deletePersonById(Integer id) {
