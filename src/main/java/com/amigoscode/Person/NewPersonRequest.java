@@ -8,6 +8,6 @@ import jakarta.validation.constraints.NotNull;
 
 public record NewPersonRequest(
         @NotEmpty @Foo String name,  //@Foo is a custom annotation
-        @Min(18) Integer age,
+        @Min(value = 18, message = "Age must be greater than 20") Integer age,
         @NotNull Gender gender
 ){}
