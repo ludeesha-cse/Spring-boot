@@ -1,6 +1,7 @@
 package com.amigoscode.Person;
 
 import com.amigoscode.SortingOrder;
+import com.amigoscode.exception.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
@@ -28,11 +29,21 @@ public class PersonService {
     public Person getPersonById(Integer id) {
         return personRepository.getPeople().stream()
                 .filter(p -> p.id().equals(id))
-                .findFirst().orElseThrow(() -> new IllegalStateException("Person with id " + id + " does not exist"));
+                .findFirst()
+                .orElseThrow(() ->
+                        new ResourceNotFoundException(
+                                "Person with id: " + id + " does not exists"));
+
     }
 
     public void deletePersonById(Integer id) {
-        personRepository.getPeople().removeIf(person -> person.id().equals(id));
+        Person person = personRepository.getPeople().stream()
+                .filter(p -> p.id().equals(id))
+                .findFirst()
+                .orElseThrow(() ->
+                        new ResourceNotFoundException(
+                                "Person with id: " + id + " does not exists"));
+        personRepository.getPeople().remove(person);
     }
 
     public void addPerson(NewPersonRequest person) {
