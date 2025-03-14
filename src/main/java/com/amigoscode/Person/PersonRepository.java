@@ -1,6 +1,5 @@
 package com.amigoscode.Person;
 
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
