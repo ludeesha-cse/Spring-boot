@@ -1,4 +1,8 @@
 package com.amigoscode.Person;
 
-public record PersonUpdateReq(String name, Integer age) {
+public record PersonUpdateReq(
+        String name,
+        Integer age,
+        String email
+) {
 }
